@@ -76,6 +76,7 @@ select {
 .form-actions {
   display: flex;
   align-items: end;
+  gap: 12px;
 }
 
 .shell {
@@ -213,6 +214,27 @@ select {
 
 .table-wrapper {
   overflow-x: auto;
+}
+
+.toolbar {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  margin-bottom: 18px;
+}
+
+.compact-field {
+  max-width: 320px;
+}
+
+.row-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.small-button {
+  padding: 8px 12px;
 }
 
 .empty-cell {

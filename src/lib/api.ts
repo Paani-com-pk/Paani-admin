@@ -163,6 +163,41 @@ export type CreateBackofficeUserPayload = {
   password: string;
 };
 
+export type ManagedUserRecord = {
+  id: string;
+  role: "CUSTOMER" | "ADMIN" | "DELIVERY";
+  name: string;
+  phone: string;
+  email?: string | null;
+  customerType?: "HOUSEHOLD" | "STORE" | "RESTAURANT" | "OFFICE" | null;
+  businessName?: string | null;
+  isActive: boolean;
+  createdAt: string;
+  addresses: { id: string; addressLine: string; label: string }[];
+  orders: { id: string }[];
+  subscriptions: { id: string; status: string }[];
+};
+
+export type CreateManagedUserPayload = {
+  name: string;
+  phone: string;
+  email?: string;
+  role: "CUSTOMER" | "ADMIN" | "DELIVERY";
+  customerType?: "HOUSEHOLD" | "STORE" | "RESTAURANT" | "OFFICE";
+  businessName?: string;
+  password: string;
+};
+
+export type UpdateManagedUserPayload = {
+  name?: string;
+  phone?: string;
+  email?: string | null;
+  role?: "CUSTOMER" | "ADMIN" | "DELIVERY";
+  customerType?: "HOUSEHOLD" | "STORE" | "RESTAURANT" | "OFFICE" | null;
+  businessName?: string | null;
+  isActive?: boolean;
+};
+
 export const api = {
   login(phone: string, password: string) {
     return request<AuthSession>("/auth/login", {
@@ -199,6 +234,30 @@ export const api = {
       token,
       method: "POST",
       body: payload,
+    });
+  },
+  managedUsers(token: string) {
+    return request<ManagedUserRecord[]>("/users/admin/all", { token });
+  },
+  createManagedUser(token: string, payload: CreateManagedUserPayload) {
+    return request<ManagedUserRecord>("/users/admin/create", {
+      token,
+      method: "POST",
+      body: payload,
+    });
+  },
+  updateManagedUser(token: string, userId: string, payload: UpdateManagedUserPayload) {
+    return request<ManagedUserRecord>(`/users/${userId}`, {
+      token,
+      method: "PATCH",
+      body: payload,
+    });
+  },
+  resetManagedUserPassword(token: string, userId: string, password: string) {
+    return request<ManagedUserRecord>(`/users/${userId}/password`, {
+      token,
+      method: "PATCH",
+      body: { password },
     });
   },
 };

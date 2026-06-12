@@ -9,6 +9,7 @@ import { OrdersPage } from "../features/orders/OrdersPage";
 import { ProductsPage } from "../features/products/ProductsPage";
 import { SubscriptionsPage } from "../features/subscriptions/SubscriptionsPage";
 import { BackofficeUsersPage } from "../features/users/BackofficeUsersPage";
+import { UserManagementPage } from "../features/users/UserManagementPage";
 import { AdminProfile, api } from "../lib/api";
 import { clearStoredToken, getStoredToken, setStoredToken } from "../lib/auth";
 
@@ -19,6 +20,7 @@ const links = [
   { to: "/orders", label: "Orders" },
   { to: "/deliveries", label: "Deliveries" },
   { to: "/subscriptions", label: "Subscriptions" },
+  { to: "/users", label: "User Management" },
   { to: "/backoffice-users", label: "Backoffice Users" },
 ];
 
@@ -160,6 +162,7 @@ export function App() {
           <Route path="/orders" element={<OrdersPage token={token} />} />
           <Route path="/deliveries" element={<DeliveriesPage token={token} />} />
           <Route path="/subscriptions" element={<SubscriptionsPage token={token} />} />
+          <Route path="/users" element={<UserManagementPage token={token} />} />
           <Route path="/backoffice-users" element={<BackofficeUsersPage token={token} />} />
         </Routes>
       </main>
