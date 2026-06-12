@@ -6,9 +6,17 @@ type DataTableProps<T> = {
   renderRow: (row: T) => ReactNode;
   title: string;
   subtitle: string;
+  emptyMessage?: string;
 };
 
-export function DataTable<T>({ columns, rows, renderRow, title, subtitle }: DataTableProps<T>) {
+export function DataTable<T>({
+  columns,
+  rows,
+  renderRow,
+  title,
+  subtitle,
+  emptyMessage = "No records available.",
+}: DataTableProps<T>) {
   return (
     <section className="panel">
       <div className="panel-header">
@@ -26,10 +34,19 @@ export function DataTable<T>({ columns, rows, renderRow, title, subtitle }: Data
               ))}
             </tr>
           </thead>
-          <tbody>{rows.map(renderRow)}</tbody>
+          <tbody>
+            {rows.length > 0 ? (
+              rows.map(renderRow)
+            ) : (
+              <tr>
+                <td className="empty-cell" colSpan={columns.length}>
+                  {emptyMessage}
+                </td>
+              </tr>
+            )}
+          </tbody>
         </table>
       </div>
     </section>
   );
 }
-

@@ -25,8 +25,44 @@ body {
   min-height: 100vh;
 }
 
-button {
+button,
+input {
   font: inherit;
+}
+
+.auth-shell {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+}
+
+.auth-card {
+  width: min(100%, 420px);
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 28px;
+  padding: 28px;
+  box-shadow: 0 18px 48px rgba(13, 31, 63, 0.08);
+}
+
+.auth-form {
+  display: grid;
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.field {
+  display: grid;
+  gap: 8px;
+}
+
+.field input {
+  width: 100%;
+  padding: 14px 16px;
+  border-radius: 16px;
+  border: 1px solid rgba(21, 98, 188, 0.16);
+  background: rgba(255, 255, 255, 0.94);
 }
 
 .shell {
@@ -62,6 +98,12 @@ button {
   grid-template-columns: 1fr auto;
   align-items: center;
   margin-bottom: 24px;
+}
+
+.action-row {
+  display: flex;
+  gap: 12px;
+  align-items: center;
 }
 
 .metrics-grid {
@@ -124,6 +166,15 @@ button {
   box-shadow: 0 14px 28px rgba(21, 98, 188, 0.24);
 }
 
+.secondary-button {
+  border: 1px solid rgba(21, 98, 188, 0.14);
+  border-radius: 999px;
+  padding: 12px 18px;
+  background: rgba(255, 255, 255, 0.75);
+  color: var(--ink);
+  cursor: pointer;
+}
+
 .plain-list {
   display: grid;
   gap: 14px;
@@ -149,6 +200,16 @@ button {
 
 .table-wrapper {
   overflow-x: auto;
+}
+
+.empty-cell {
+  text-align: center;
+  color: var(--muted);
+}
+
+.state-panel.error,
+.error-text {
+  color: #b42318;
 }
 
 table {
