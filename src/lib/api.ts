@@ -145,6 +145,24 @@ export type SubscriptionRecord = {
   user: { name: string };
 };
 
+export type BackofficeUserRecord = {
+  id: string;
+  role: "ADMIN" | "DELIVERY";
+  name: string;
+  phone: string;
+  email?: string | null;
+  isActive: boolean;
+  createdAt: string;
+};
+
+export type CreateBackofficeUserPayload = {
+  name: string;
+  phone: string;
+  email?: string;
+  role: "ADMIN" | "DELIVERY";
+  password: string;
+};
+
 export const api = {
   login(phone: string, password: string) {
     return request<AuthSession>("/auth/login", {
@@ -172,5 +190,15 @@ export const api = {
   },
   subscriptions(token: string) {
     return request<SubscriptionRecord[]>("/subscriptions", { token });
+  },
+  backofficeUsers(token: string) {
+    return request<BackofficeUserRecord[]>("/users/backoffice", { token });
+  },
+  createBackofficeUser(token: string, payload: CreateBackofficeUserPayload) {
+    return request<BackofficeUserRecord>("/users/backoffice", {
+      token,
+      method: "POST",
+      body: payload,
+    });
   },
 };
